@@ -111,6 +111,7 @@ public class GoogleOAuth2Filter extends AbstractAuthenticationProcessingFilter {
 
             CustomOAuth2AuthenticationToken authenticationToken = getOAuth2Token(
                     profile.get(EMAIL));
+            System.out.println(profile.get(EMAIL)+"*******************************************8");
             authenticationToken.setAuthenticated(false);
 
             return getAuthenticationManager().authenticate(authenticationToken);

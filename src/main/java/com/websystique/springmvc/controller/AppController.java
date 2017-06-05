@@ -19,9 +19,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -80,7 +82,8 @@ public class AppController {
 	
 	@Autowired
     private RoleDao roleRepository;
-	
+	 @Autowired
+	    private OAuth2RestTemplate oauth2RestTemplate;
 	@InitBinder("fileBucket")
 	protected void initBinder(WebDataBinder binder) {
 	   binder.setValidator(fileValidator);
@@ -95,7 +98,17 @@ public class AppController {
 		//get username
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String name = auth.getName(); //get logged in username
+	    if(name.equals("dummyUserName23452346789"))
+	    {
+	    	ResponseEntity<Object> forEntity = oauth2RestTemplate.getForEntity(
+	                "https://www.googleapis.com/plus/v1/people/me/openIdConnect",
+	                Object.class);
 
+	        @SuppressWarnings("unchecked")
+	        Map<String, String> profile = (Map<String, String>) forEntity.getBody();
+	        name=profile.get("email");
+	    }
+	    
 	    model.addAttribute("username", name);
 		
 		

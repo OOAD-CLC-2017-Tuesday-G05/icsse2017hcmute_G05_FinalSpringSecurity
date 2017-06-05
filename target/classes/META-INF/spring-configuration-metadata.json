@@ -2,7 +2,7 @@
   "groups": [{
     "name": "google.client",
     "type": "org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails",
-    "sourceType": "com.websystique.springmvc.configuration.WebSecurityConfig",
+    "sourceType": "com.websystique.springmvc.configuration.SecurityConfiguration",
     "sourceMethod": "public org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails auth2ProtectedResourceDetails() "
   }],
   "properties": [{
