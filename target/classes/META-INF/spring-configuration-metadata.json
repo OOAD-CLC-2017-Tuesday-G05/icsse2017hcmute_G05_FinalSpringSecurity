@@ -1,0 +1,14 @@
+{
+  "groups": [{
+    "name": "google.client",
+    "type": "org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails",
+    "sourceType": "com.websystique.springmvc.configuration.WebSecurityConfig",
+    "sourceMethod": "public org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails auth2ProtectedResourceDetails() "
+  }],
+  "properties": [{
+    "name": "google.client.scope",
+    "type": "java.util.List<java.lang.String>",
+    "sourceType": "org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails"
+  }],
+  "hints": []
+}

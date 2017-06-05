@@ -10,6 +10,7 @@ import java.net.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -147,11 +148,22 @@ public class AppController {
 
         return "jsp/login";
     }
-/*	@RequestMapping(value = { "/logout" }, method = RequestMethod.GET)
-	public String logout(ModelMap model) throws MalformedURLException, IOException {
-		
-		return "redirect:/login?logout";
-	}*/
+	@RequestMapping(value = { "/logout" }, method = RequestMethod.GET)
+	public String logout(ModelMap model, HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws MalformedURLException, IOException {
+		for(Cookie cookie : request.getCookies()) {
+	            //Clear one cookie
+	            cookie.setValue("");
+	            cookie.setMaxAge(0);
+	            cookie.setPath(request.getContextPath());
+	            response.addCookie(cookie);
+	            //Clear the other cookie
+	            Cookie cookieWithSlash = (Cookie) cookie.clone();
+	            cookieWithSlash.setPath(request.getContextPath() + "/");
+	            response.addCookie(cookieWithSlash);
+	        
+	    }
+		return "redirect:/";
+	}
 	@RequestMapping(value = { "/403" }, method = RequestMethod.GET)
     public String accessDenied() {
         return "jsp/403";

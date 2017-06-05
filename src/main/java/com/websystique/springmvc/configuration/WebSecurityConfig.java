@@ -38,7 +38,6 @@ import com.websystique.springmvc.filter.GoogleOauth2AuthProvider;
 @EnableOAuth2Client
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 @PropertySource(value = {"classpath:oauth.properties"})
-@ComponentScan(basePackages = "com.websystique.springmvc")
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -49,9 +48,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
     
-/*    @Resource
+    @Resource
     @Qualifier("accessTokenRequest")
-    private AccessTokenRequest accessTokenRequest;*/
+    private AccessTokenRequest accessTokenRequest;
 
     @Autowired
     private OAuth2ClientContextFilter oAuth2ClientContextFilter;
@@ -102,7 +101,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public OAuth2RestTemplate oauth2RestTemplate() {
-        return new OAuth2RestTemplate(auth2ProtectedResourceDetails());
+        return new OAuth2RestTemplate(auth2ProtectedResourceDetails(),
+                new DefaultOAuth2ClientContext(accessTokenRequest));
     }
 
 

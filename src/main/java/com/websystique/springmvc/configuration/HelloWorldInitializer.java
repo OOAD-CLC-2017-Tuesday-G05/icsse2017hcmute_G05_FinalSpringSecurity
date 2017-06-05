@@ -1,6 +1,8 @@
 package com.websystique.springmvc.configuration;
 
 import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
@@ -31,7 +33,6 @@ public class HelloWorldInitializer extends AbstractAnnotationConfigDispatcherSer
 		MultipartConfigElement multipartConfigElement = new MultipartConfigElement(LOCATION, MAX_FILE_SIZE, MAX_REQUEST_SIZE, FILE_SIZE_THRESHOLD);
 		return multipartConfigElement;
 	}
-    
     /*Set these variables for your project needs*/ 
     
 	private static final String LOCATION = "C:/mytemp/";

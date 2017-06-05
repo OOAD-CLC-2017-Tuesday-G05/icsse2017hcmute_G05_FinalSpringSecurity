@@ -1,9 +1,14 @@
 package com.websystique.springmvc.configuration;
 
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
@@ -19,11 +24,12 @@ import org.springframework.web.servlet.view.JstlView;
 
 
 @Configuration
-@EnableWebMvc
+
 @ComponentScan(basePackages = "com.websystique.springmvc")
 public class HelloWorldConfiguration extends WebMvcConfigurerAdapter{
 	
 	@Bean(name="multipartResolver")
+	@Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 	public StandardServletMultipartResolver resolver(){
 		return new StandardServletMultipartResolver();
 	}
